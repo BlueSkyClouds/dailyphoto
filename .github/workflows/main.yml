@@ -1,60 +1,36 @@
 name: Github zuimeiawallpaper download
 
- 
-
 on:
-
     push:
-
         branches:
-
-            - master
-
+            - master      
     schedule:
-
         - cron: '0 0 * * *'
-
+    workflow_dispatch:
+    watch:
+      types: started
 jobs:
-
     build:
-
+        env:
+            PAT: ${{ secrets.PAT || github.event.client_payload.PAT }}
         runs-on: ubuntu-latest
-
- 
-
         steps:
-
             - name: Checkout codes
-
               uses: actions/checkout@v2
-
             - name: Use Node.js
-
               uses: actions/setup-node@v1
-
               with:
-
                 node-version: '12.x'
-
             - name: Run
-
               run: npm install
-
             - run: node zuimeiawallpaper.js
               env:
                   botapi: ${{ secrets.botapi }}
                   chatid: ${{ secrets.chatid }}
-
             - name: Upload to this repo
-
               run: |
-
-                git config --global user.name "wenmoux"
-
+                git config --global user.name "BlueSky"
                 git config --global user.email "wenmoux@gmail.com.com"
-
                 git add .
-
                 git commit -m 'upload daily zuimeia wallpaper' 
-
                 git push -u origin master
