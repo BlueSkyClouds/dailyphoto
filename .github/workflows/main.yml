@@ -29,8 +29,8 @@ jobs:
                   chatid: ${{ secrets.chatid }}
             - name: Upload to this repo
               run: |
-                git config --global user.name "BlueSky"
-                git config --global user.email "wenmoux@gmail.com.com"
+                git config --global user.name "BlueSkyClouds"
+                git config --global user.email "*@gmail.com.com"
                 git add .
                 git commit -m 'upload daily zuimeia wallpaper' 
                 git push -u origin master
